@@ -1,0 +1,9 @@
+<h1>{{title}}</h1>
+{{#each employers}}
+    <div class="card col-4">
+        <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text">{{this.location}}</p>
+        </div>
+    </div>
+{{/each}}

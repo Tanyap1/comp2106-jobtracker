@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Job Tracker' });
 });
 
+/*about page*/
+router.get('/about', (req, res)=> {
+  //load the about.hbs view
+  res.render('about', {title:"About this site"})
+})
 module.exports = router;

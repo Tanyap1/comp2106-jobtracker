@@ -4,10 +4,27 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var index = require('./controllers/index');
+var users = require('./controllers/users');
+//add ref to our new employers controller
+const employers =require ('./controllers/employers')
+
 
 var app = express();
+
+//mongoose db connection
+const mongoose = require ('mongoose')
+
+//try to connect
+mongoose.connect('mongodb+srv://comp2106:xungoo8a@comp2106.cjybf.mongodb.net/comp2106?retryWrites=true&w=majority', {
+
+}).then((res)=>{
+  console.log('Connected to MongoDB')
+}).catch(()=>{
+  console.log('MongoDB connection Failed')
+})
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,9 +36,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
+app.use('/', index);
+app.use('/users', users);
+app.use('/employers', employers)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
