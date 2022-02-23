@@ -6,25 +6,26 @@ var logger = require('morgan');
 
 var index = require('./controllers/index');
 var users = require('./controllers/users');
-//add ref to our new employers controller
-const employers =require ('./controllers/employers')
-
+// add ref to our new employers controller
+const employers = require('./controllers/employers')
 
 var app = express();
 
-//mongoose db connection
-const mongoose = require ('mongoose')
+// if not in production mode, use .env file for db connection string
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
-//try to connect
-mongoose.connect('mongodb+srv://comp2106:xungoo8a@comp2106.cjybf.mongodb.net/comp2106?retryWrites=true&w=majority', {
+// mongoose db connection
+const mongoose = require('mongoose')
 
-}).then((res)=>{
+// try to connect
+mongoose.connect(process.env.DATABASE_URL, {
+}).then((res) => {
   console.log('Connected to MongoDB')
-}).catch(()=>{
-  console.log('MongoDB connection Failed')
+}).catch(() => {
+  console.log('MongoDB connection failed')
 })
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,9 +37,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// map url prefixes to the appropriate controller
 app.use('/', index);
 app.use('/users', users);
 app.use('/employers', employers)
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
