@@ -1,12 +1,22 @@
+
+
 <h1>{{title}}</h1>
-<a href="/employers/create" class="btn btn-secondary">Add new Employer</a>
+<a href="/employers/create" class="btn btn-secondary">Add a New Employer</a>
 <section class="row">
-{{#each employers}}
-    <div class="card col-3 m-2">
-        <div class="card-body text-center h-100">
-            <h5 class="card-title">{{this.name}}</h5>
-            <p class="card-text">{{this.location}}</p>
+    {{#each employers}}
+        <div class="card col-3 m-2">
+            <div class="card-body text-center h-100">
+                <h5 class="card-title">
+                    <a href="/employers/edit/{{this._id}}">
+                        {{this.name}}
+                    </a>                   
+                </h5>
+                <p class="card-text">{{this.location}}</p>
+                <a class="btn btn-warning" href="/employers/delete/{{this._id}}" 
+                    onclick="return confirmDelete()">
+                    Delete
+                </a>
+            </div>
         </div>
-    </div>
-{{/each}}
+    {{/each}}
 </section>

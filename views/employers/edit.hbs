@@ -1,0 +1,20 @@
+<h1>{{title}}</h1>
+<form method="post">
+    <fieldset>
+        <label class="control-label col-2" for="name">Name: *</label>
+        <input name="name" id="name" required value="{{employer.name}}" />
+    </fieldset>
+    <fieldset>
+        <label class="control-label col-2" for="location">Location: *</label>
+        <input name="location" id="location" required value="{{employer.location}}" />
+    </fieldset>
+    <fieldset>
+        <label class="control-label col-2" for="description">Description: </label>
+        <textarea name="description" id="description">{{employer.description}}</textarea>
+    </fieldset>
+    <fieldset>
+        <label class="control-label col-2" for="website">Web Site: </label>
+        <input name="website" id="website" type="url" value="{{employer.website}}" />
+    </fieldset>
+    <button class="btn btn-secondary offset-2">Save</button>
+</form>
